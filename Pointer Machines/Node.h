@@ -1,38 +1,38 @@
 template <class K, class D>
-class Nodo
+class Node
 {
 private:
 	
 public:
 	K key;
 	D dato;
-	Nodo* siguiente;
-	Nodo* anterior;
+	Node* siguiente;
+	Node* anterior;
 
 
-	Nodo(K p_key, D p_dato);
+	Node(K p_key, D p_dato);
 	D  GetDato();
-	void  SetSiguiente(Nodo* p_nodo);
-	Nodo* GetAnterior()
+	void  SetSiguiente(Node* p_node);
+	Node* GetAnterior()
 	{
 		return anterior;
 	}
-	Nodo*  GetSiguiente()
+	Node*  GetSiguiente()
 	{
 		return  siguiente;
 	}
-	~Nodo();
+	~Node();
 };
 
 template <class K, class D>
-void Nodo<K,D>::SetSiguiente(Nodo* p_nodo)
+void Node<K,D>::SetSiguiente(Node* p_node)
 {
-	siguiente = p_nodo;
+	siguiente = p_node;
 	
 }
 
 template <class K, class D>
-Nodo<K,D>::Nodo(K p_key, D p_dato)
+Node<K,D>::Node(K p_key, D p_dato)
 {
 	key = p_key;
 	dato = p_dato;
@@ -41,13 +41,13 @@ Nodo<K,D>::Nodo(K p_key, D p_dato)
 }
 
 template <class K, class D>
-D Nodo<K,D>::GetDato()
+D Node<K,D>::GetDato()
 {
 	return dato;
 }
 
 template <class K, class D>
-Nodo<K,D>::~Nodo()
+Node<K,D>::~Node()
 {
 	//this->dato = nullptr;
 	this->siguiente = nullptr;
