@@ -11,15 +11,16 @@ public:
 
 
 	Node(K p_key, D p_dato);
-	D  GetDato();
+	K GetKey();
+	D GetDato();
 	void  SetSiguiente(Node* p_node);
 	Node* GetAnterior()
 	{
 		return anterior;
 	}
-	Node*  GetSiguiente()
+	Node* GetSiguiente()
 	{
-		return  siguiente;
+		return siguiente;
 	}
 	~Node();
 };
@@ -44,6 +45,11 @@ template <class K, class D>
 D Node<K,D>::GetDato()
 {
 	return dato;
+}
+
+K Node<K,D>::GetKey()
+{
+	return key;
 }
 
 template <class K, class D>
