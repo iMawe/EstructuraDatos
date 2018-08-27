@@ -47,6 +47,7 @@ D Node<K,D>::GetDato()
 	return dato;
 }
 
+template <class K, class D>
 K Node<K,D>::GetKey()
 {
 	return key;

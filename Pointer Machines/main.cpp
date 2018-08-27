@@ -4,7 +4,8 @@ using namespace std;
 #include "LinkedList.h"
 
 int main(){
-	LinkedList list;
+	LinkedList<int,int> list;
+
 	list.Insert(1,23);
 	list.Insert(2,12);
 	list.Insert(3,45);

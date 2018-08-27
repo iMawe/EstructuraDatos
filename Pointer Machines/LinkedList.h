@@ -17,18 +17,18 @@ public:
 };
 
 template <class K, class D>
-ListaEnlazada<K,D>::ListaEnlazada()
+LinkedList<K,D>::LinkedList()
 {
 	raiz = nullptr;
 }
 
 template <class K, class D>
-ListaEnlazada<K,D>::~ListaEnlazada()
+LinkedList<K,D>::~LinkedList()
 {
 }
 
 template <class K, class D>
-bool ListaEnlazada<K,D>::Insert(K p_key, D p_dato)
+bool LinkedList<K,D>::Insert(K p_key, D p_dato)
 {
 	if (raiz == nullptr)
 	{
@@ -60,7 +60,7 @@ bool ListaEnlazada<K,D>::Insert(K p_key, D p_dato)
 }
 
 template <class K, class D>
-void ListaEnlazada<K,D>::Show()
+void LinkedList<K,D>::Show()
 {
 	Node<K,D>* actual = raiz;
 	while(actual!=nullptr)
@@ -71,7 +71,7 @@ void ListaEnlazada<K,D>::Show()
 }
 
 template <class K, class D>
-bool ListaEnlazada<K,D>::Remove(K p_key)
+bool LinkedList<K,D>::Remove(K p_key)
 {
 	if (raiz!= nullptr)
 	{
@@ -114,7 +114,7 @@ bool ListaEnlazada<K,D>::Remove(K p_key)
 }
 
 template <class K, class D>
-Node<K,D>*  ListaEnlazada<K,D>::GetRaiz()
+Node<K,D>*  LinkedList<K,D>::GetRaiz()
 {
 	return raiz;
 }
