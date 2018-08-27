@@ -13,7 +13,7 @@ public:
 	bool Insert(K p_key, D p_dato);
 	bool Remove(K p_key);
 	void Show();
-	Nodo<K,D>* GetRaiz();
+	Node<K,D>* GetRaiz();
 };
 
 template <class K, class D>
@@ -62,7 +62,7 @@ bool ListaEnlazada<K,D>::Insert(K p_key, D p_dato)
 template <class K, class D>
 void ListaEnlazada<K,D>::Show()
 {
-	Nodo<K,D>* actual = raiz;
+	Node<K,D>* actual = raiz;
 	while(actual!=nullptr)
 	{
 		cout << actual->GetKey()<<"->";
