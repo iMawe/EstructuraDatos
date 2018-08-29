@@ -13,7 +13,7 @@ void Stack<K,D>::Pop()
 template <class K, class D>
 K Stack<K,D>::Top()
 {
-	cout<<"top ->" << List.raiz->dato << endl;
+	cout<<"top ->" << List.raiz->key << endl;
 	//return List.raiz->dato;
 }
 
