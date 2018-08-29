@@ -10,8 +10,11 @@ public:
 	LinkedList();
 	~LinkedList();
 
-	bool Insert(K p_key, D p_dato);
-	bool Remove(K p_key);
+	bool InsertFront(K p_key, D p_dato);
+	bool InsertBack(K p_key, D p_dato);
+	bool RemoveFront();
+	bool RemoveBack();
+	//bool RemoveNode(Node<K,D>* n);
 	void Show();
 	Node<K,D>* GetRaiz();
 };
@@ -28,7 +31,7 @@ LinkedList<K,D>::~LinkedList()
 }
 
 template <class K, class D>
-bool LinkedList<K,D>::Insert(K p_key, D p_dato)
+bool LinkedList<K,D>::InsertFront(K p_key, D p_dato)
 {
 	if (raiz == nullptr)
 	{
@@ -71,31 +74,14 @@ void LinkedList<K,D>::Show()
 }
 
 template <class K, class D>
-bool LinkedList<K,D>::Remove(K p_key)
+bool LinkedList<K,D>::RemoveFront()
 {
-	if (raiz!= nullptr)
+	if (raiz != nullptr)
 	{
 		Node<K,D>* Actual = raiz;
-
-		if (raiz->GetKey() == p_key)
-		{
-			raiz = Actual->siguiente;
-			delete Actual;
-			return true;
-		}
-
-		else if (raiz->siguiente == nullptr)
-		{
-			raiz = nullptr;
-			return true;
-
-		}
-		
-		else 
-		{ 
-
 		Node<K,D>* Temp = Actual;
-		while (Actual->GetKey() != p_key)
+
+		while (Actual->siguiente != nullptr)
 		{
 			Temp = Actual;			
 			Actual = Actual->siguiente;		
@@ -104,17 +90,62 @@ bool LinkedList<K,D>::Remove(K p_key)
 		Temp->siguiente = Actual->siguiente;
 		delete Actual;
 		return true;
-		}
+	}
+	else
+		return false;
+	return false;
+}
+
+template <class K, class D>
+Node<K,D>* LinkedList<K,D>::GetRaiz()
+{
+	return raiz;
+}
+template <class K, class D>
+bool LinkedList<K,D>::InsertBack(K p_key, D p_dato){
+	if (raiz == nullptr)
+	{
+		raiz = new Node<K,D>(p_key, p_dato);
+		return true;
 	}
 	else
 	{
+		Node<K,D>* actual = raiz;
+		Node<K,D>* Nuevo= new Node<K,D>(p_key, p_dato);
+		Nuevo->siguiente = actual;
+		raiz = Nuevo;
+		return true;
+	}	
+}
+
+template <class K, class D>
+bool LinkedList<K,D>::RemoveBack(){
+	if (raiz != nullptr)
+	{
+		Node<K,D>* Actual = raiz;
+
+		if(Actual->siguiente != nullptr)
+		{	
+			raiz = Actual->siguiente;
+			Actual = nullptr;
+			delete Actual;
+			return true;
+		}
+
+		else
+		{
+			raiz = nullptr;
+			delete raiz;
+			return true;
+		}
+	}
+	else{
 		return false;
 	}
 	return false;
 }
 
-template <class K, class D>
-Node<K,D>*  LinkedList<K,D>::GetRaiz()
-{
-	return raiz;
-}
+/*template <class K, class D>
+bool LinkedList<K,D>::RemoveNode(Node<K,D>* n*){
+
+}*/
