@@ -1,4 +1,9 @@
+#ifndef QUEUE_H
+#define QUEUE_H
+
 #include "LinkedList.h"
+#include <iostream>
+using namespace std;
 template <class K, class D>
 class Queue
 {
@@ -13,36 +18,6 @@ public:
 	~Queue();
 };
 
-template <class K, class D>
-void Queue<Tipo>::PushBack(K p_key, D p_dato)
-{
-	List.InsertFront(p_key,  p_dato);
-}
-template <class K, class D>
-void Queue<Tipo>::Pop()
-{
-	List.RemoveBack();
-}
+#include "Queue.inl"
 
-template <class K, class D>
-K Queue<Tipo>::Top()
-{
-		cout << "Este es el Top ->" << Lista.raiz->dato << endl;
-		return List.raiz->dato;
-}
-template <class K, class D>
-void Queue<Tipo>::Print()
-{
-	list.Show();
-}
-
-template <class K, class D>
-Queue<Tipo>::Queue()
-{
-}
-
-template <class K, class D>
-Queue<Tipo>::~Queue()
-{
-}
-
+#endif
