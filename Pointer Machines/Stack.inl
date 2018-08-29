@@ -1,5 +1,5 @@
 template <class K, class D>
-void Stack<K,D>::Push(K p_key, D p_dato)
+void Stack<K,D>::Push(const K & p_key, const D & p_dato)
 {
 	List.InsertBack(p_key, p_dato);
 }

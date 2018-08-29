@@ -11,15 +11,18 @@ class LinkedList
 public:
 	Node<K,D>* raiz;
 
-public:
+public:	
 	LinkedList();
+	LinkedList(const LinkedList & List);
+
+	LinkedList & operator = (const LinkedList & List);
+
 	~LinkedList();
 
-	bool InsertFront(K p_key, D p_dato);
-	bool InsertBack(K p_key, D p_dato);
+	bool InsertFront(const K & p_key, const D & p_dato);
+	bool InsertBack(const K & p_key, const D & p_dato);
 	bool RemoveFront();
 	bool RemoveBack();
-	//bool RemoveNode(Node<K,D>* n);
 	void Show();
 	Node<K,D>* GetRaiz();
 };

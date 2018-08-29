@@ -1,5 +1,5 @@
 template <class K, class D>
-void Queue<K,D>::PushBack(K p_key, D p_dato)
+void Queue<K,D>::PushBack(const K & p_key, const D & p_dato)
 {
 	List.InsertFront(p_key,  p_dato);
 }

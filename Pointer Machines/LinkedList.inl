@@ -10,7 +10,7 @@ LinkedList<K,D>::~LinkedList()
 }
 
 template <class K, class D>
-bool LinkedList<K,D>::InsertFront(K p_key, D p_dato)
+bool LinkedList<K,D>::InsertFront(const K & p_key, const D & p_dato)
 {
 	if (raiz == nullptr)
 	{
@@ -81,7 +81,7 @@ Node<K,D>* LinkedList<K,D>::GetRaiz()
 	return raiz;
 }
 template <class K, class D>
-bool LinkedList<K,D>::InsertBack(K p_key, D p_dato){
+bool LinkedList<K,D>::InsertBack(const K & p_key, const D & p_dato){
 	if (raiz == nullptr)
 	{
 		raiz = new Node<K,D>(p_key, p_dato);
@@ -123,8 +123,3 @@ bool LinkedList<K,D>::RemoveBack(){
 	}
 	return false;
 }
-
-/*template <class K, class D>
-bool LinkedList<K,D>::RemoveNode(Node<K,D>* n*){
-
-}*/

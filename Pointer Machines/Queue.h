@@ -11,7 +11,7 @@ private:
 	LinkedList<K,D> List;
 public:
 	Queue();
-	void PushBack(K p_key, D p_dato);
+	void PushBack(const K & p_key, const D & p_dato);
 	void Pop();
 	K Top();
 	void Print();
