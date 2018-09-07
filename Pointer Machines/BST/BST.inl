@@ -1,0 +1,72 @@
+template <class K, class D>
+bool BST<K,D>::find(const K & key, D & dato){
+	Node<K,D> **n;
+	if(find(key, n)){
+		dato = (*n)->dato;
+		return true;
+	}
+	return false;
+}
+
+template <class K, class D>
+bool BST<K,D>::insert(const K & key, const D & dato){
+	Node<K,D>** n;
+	if(!find(key,n)){
+		*n = new Node<K,D>(key,dato);
+		return true;
+	}
+	return false;
+}
+
+template <class K, class D>
+bool BST<K,D>::find(const K & key, Node<K,D>** &n){
+	n = &p_root;
+	while(*n){
+		if((*n)->key == key)
+			return true;
+		n = &(*n)->p_child[(*n)->key < key];
+	} //while Existe n
+	return false;
+}
+
+template <class K, class D>
+void BST<K,D>::remove(K & key, D & dato){
+	remove(&p_root,key);
+}
+
+template <class K, class D>
+void BST<K,D>::remove(Node<K,D>** n,K key){
+	if(*n == NULL) return ;//No es encontrar el valor X de los nodos 
+    if(key <(*n)->key) 
+    { 
+         remove(&(*n)->p_children[0], key);//Si X es inferior al valor del nodo, sigue en el árbol de la izquierda elimina el nodo X 
+    }
+ 
+    else if(key > (*n)->key) 
+    { 
+         remove(&(*n)->p_children[1], key);//Si X es mayor que el valor del nodo, sigue en el nodo eliminar X subárbol 
+    } 
+ 
+    else//Si son iguales, el nodo es eliminar nodo 
+    { 
+        if((*n)->p_children[0] && (*n)->p_children[1])//El nodo tiene dos hijos 
+        { 
+            Node<K,D>* temp = (*n)->p_children[1];//Nodos hijo temp hacia la derecha 
+            while(temp->p_children[0]!=NULL) temp=temp->p_children[0];//Encontrar un mínimo de nodos
+            //A la derecha en el valor mínimo de nodos subárbol de asignar a este nodo 
+            (*n)->key = temp->key;
+            (*n)->dato = temp->dato;
+            remove(&(*n)->p_children[1],temp->key);//Eliminar nodos en el valor mínimo de la derecha subárbol 
+        } 
+        else//El nodo tiene un hijo o 1 0 
+        { 
+            Node<K,D>* temp = *n; 
+            if((*n)->p_children[0] == NULL)//Hijo o no, el hijo de la derecha 
+            	(*n) = (*n)->p_children[1]; 
+            else if((*n)->p_children[1] == NULL)//A la izquierda, hijo 
+            	(*n) = (*n)->p_children[0];
+            temp = NULL; 
+            delete(temp); 
+        } 
+	} 
+}//--->tarea
