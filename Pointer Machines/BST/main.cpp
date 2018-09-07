@@ -10,6 +10,7 @@ int main(){
 		a = rand() % 100;
 		tree.insert(a,1);
 	}
+	tree.remove(41);
 	tree.print();
 
 
