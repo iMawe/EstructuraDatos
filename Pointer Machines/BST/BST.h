@@ -1,6 +1,8 @@
 #ifndef BST_H
 #define BST_H
 
+using namespace std;
+
 template <class K,class D>
 class BST;
 
@@ -31,6 +33,7 @@ public:
 private:
 	bool find(const K & key, Node<K,D>** &n);
 	void remove(Node<K,D>** n, K key);
+	void print(Node<K,D> *n);
 };
 
 #include "BST.inl"

@@ -12,6 +12,7 @@ int main(){
 	tree.insert(5,1);
 	tree.insert(7,1);
 	tree.insert(6,1);
+	tree.print();
 
 
 

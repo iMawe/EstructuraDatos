@@ -55,7 +55,7 @@ void BST<K,D>::remove(Node<K,D>** n,K key){
          remove(&(*n)->p_children[0], key);//Si X es inferior al valor del nodo, sigue en el árbol de la izquierda elimina el nodo X 
     }
  
-    else if(key > (*n)->key) 
+    else if(key > (*n)->key)
     { 
          remove(&(*n)->p_children[1], key);//Si X es mayor que el valor del nodo, sigue en el nodo eliminar X subárbol 
     } 
@@ -84,4 +84,29 @@ void BST<K,D>::remove(Node<K,D>** n,K key){
 	} 
 }//--->tarea
 
-void BST<K,D>::print()
+template <class K, class D>
+void BST<K,D>::print(){
+	cout<<"graph {"<<endl;
+	cout<<p_root->key<<endl;
+	print(p_root);
+	cout<<"}"<<endl;
+}
+
+template <class K, class D>
+void BST<K,D>::print(Node<K,D> *n){
+	if(n!=NULL)
+    {
+        if(n->p_child[0]!=NULL){
+            cout<<n->key;
+            cout<<"--";
+            cout<<n->p_child[0]->key<<endl;
+            print(n->p_child[0]);
+        }
+        if(n->p_child[1]!=NULL){
+            cout<<n->key;
+            cout<<"--";
+            cout<<n->p_child[1]->key<<endl;
+            print(n->p_child[1]);
+        }
+    }
+}
