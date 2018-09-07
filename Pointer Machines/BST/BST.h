@@ -28,7 +28,7 @@ public:
 	virtual ~BST();
 	bool find(const K & key, D & dato);
 	bool insert(const K & key, const D & dato);
-	void remove(K & key, D & dato);
+	void remove(const K & key);
 	void print();
 private:
 	bool find(const K & key, Node<K,D>** &n);

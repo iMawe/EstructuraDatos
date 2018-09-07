@@ -43,7 +43,7 @@ bool BST<K,D>::find(const K & key, Node<K,D>** &n){
 }
 
 template <class K, class D>
-void BST<K,D>::remove(K & key, D & dato){
+void BST<K,D>::remove(const K & key){
 	remove(&p_root,key);
 }
 
@@ -52,32 +52,32 @@ void BST<K,D>::remove(Node<K,D>** n,K key){
 	if(*n == NULL) return ;//No es encontrar el valor X de los nodos 
     if(key <(*n)->key) 
     { 
-         remove(&(*n)->p_children[0], key);//Si X es inferior al valor del nodo, sigue en el árbol de la izquierda elimina el nodo X 
+         remove(&(*n)->p_child[0], key);//Si X es inferior al valor del nodo, sigue en el árbol de la izquierda elimina el nodo X 
     }
  
     else if(key > (*n)->key)
     { 
-         remove(&(*n)->p_children[1], key);//Si X es mayor que el valor del nodo, sigue en el nodo eliminar X subárbol 
+         remove(&(*n)->p_child[1], key);//Si X es mayor que el valor del nodo, sigue en el nodo eliminar X subárbol 
     } 
  
     else//Si son iguales, el nodo es eliminar nodo 
     { 
-        if((*n)->p_children[0] && (*n)->p_children[1])//El nodo tiene dos hijos 
+        if((*n)->p_child[0] && (*n)->p_child[1])//El nodo tiene dos hijos 
         { 
-            Node<K,D>* temp = (*n)->p_children[1];//Nodos hijo temp hacia la derecha 
-            while(temp->p_children[0]!=NULL) temp=temp->p_children[0];//Encontrar un mínimo de nodos
+            Node<K,D>* temp = (*n)->p_child[1];//Nodos hijo temp hacia la derecha 
+            while(temp->p_child[0]!=NULL) temp=temp->p_child[0];//Encontrar un mínimo de nodos
             //A la derecha en el valor mínimo de nodos subárbol de asignar a este nodo 
             (*n)->key = temp->key;
             (*n)->dato = temp->dato;
-            remove(&(*n)->p_children[1],temp->key);//Eliminar nodos en el valor mínimo de la derecha subárbol 
+            remove(&(*n)->p_child[1],temp->key);//Eliminar nodos en el valor mínimo de la derecha subárbol 
         } 
         else//El nodo tiene un hijo o 1 0 
         { 
             Node<K,D>* temp = *n; 
-            if((*n)->p_children[0] == NULL)//Hijo o no, el hijo de la derecha 
-            	(*n) = (*n)->p_children[1]; 
-            else if((*n)->p_children[1] == NULL)//A la izquierda, hijo 
-            	(*n) = (*n)->p_children[0];
+            if((*n)->p_child[0] == NULL)//Hijo o no, el hijo de la derecha 
+            	(*n) = (*n)->p_child[1]; 
+            else if((*n)->p_child[1] == NULL)//A la izquierda, hijo 
+            	(*n) = (*n)->p_child[0];
             temp = NULL; 
             delete(temp); 
         } 
