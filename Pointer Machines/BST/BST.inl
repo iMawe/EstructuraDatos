@@ -1,4 +1,17 @@
 template <class K, class D>
+Node<K,D>::Node(const K k,const D d, Node<K,D> * children){
+	key = k;
+	dato = d;
+	p_child[1] = NULL;
+    p_child[0] = NULL;
+}
+template <class K, class D>
+Node<K,D>::~Node(){}
+
+template <class K, class D>
+BST<K,D>::~BST(){}
+
+template <class K, class D>
 bool BST<K,D>::find(const K & key, D & dato){
 	Node<K,D> **n;
 	if(find(key, n)){
@@ -70,3 +83,5 @@ void BST<K,D>::remove(Node<K,D>** n,K key){
         } 
 	} 
 }//--->tarea
+
+void BST<K,D>::print()

@@ -11,7 +11,7 @@ private:
 	K key;
 	Node<K,D>* p_child[2];
 public:
-	Node(const K k, const D d, Node<K,D> * children=NULL);
+	Node(const K k, const D d, Node<K,D>* children=NULL);
 	virtual ~Node();
 
 friend class BST<K,D>;
@@ -27,6 +27,7 @@ public:
 	bool find(const K & key, D & dato);
 	bool insert(const K & key, const D & dato);
 	void remove(K & key, D & dato);
+	void print();
 private:
 	bool find(const K & key, Node<K,D>** &n);
 	void remove(Node<K,D>** n, K key);
