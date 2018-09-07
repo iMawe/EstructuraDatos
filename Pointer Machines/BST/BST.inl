@@ -49,6 +49,59 @@ void BST<K,D>::remove(const K & key){
 
 template <class K, class D>
 void BST<K,D>::remove(Node<K,D>** n,K key){
+	
+	bool c = false;
+	c = find((*n),key);
+	if((*n) == NULL)
+		return;
+	else if(key < (*n)->key)
+	{
+		(*n)->p_child[0] = remove((*n)->p_child[0],key);
+	}
+	else if(key> (*n)->key)
+	{
+		(*n)->p_child[1]= remove((*n)->p_child[1],key);
+	}
+	
+	// Node deletion
+	else
+	{
+		//case 1: Leaf Node
+		if((*n)->p_child[0]==NULL && (*n)->p_child[1]==NULL)
+		{
+			delete (*n);
+			n = NULL;
+			return (*n);
+		}
+		//case 2: one child
+		else if((*n)->p_child[0]==NULL)
+		{
+			Node<K,D>** temp = n;
+			(*n) = (*n)->p_child[1];
+			delete temp;
+			return (*n);
+		}
+		else if((*n)->p_child[1]==NULL)
+		{
+			Node<K,D>** temp = n;
+			(*n) = (*n)->p_child[0];
+			delete temp;
+			return (*n);
+		}
+		//case 3: 2 child
+		else
+		{
+			Node<K,D>* temp = findMin((*n)->p_child[1]);
+			(*n)->key = temp->key;
+			(*n)->dato = temp->dato;
+			(*n)->p_child[1] = remove((*n)->p_child[1], temp->key);
+		}
+	}
+
+
+
+
+/*
 	if(*n == NULL) return ;//No es encontrar el valor X de los nodos 
     if(key <(*n)->key) 
     { 
@@ -81,7 +134,7 @@ void BST<K,D>::remove(Node<K,D>** n,K key){
             temp = NULL; 
             delete(temp); 
         } 
-	} 
+	} */
 }//--->tarea
 
 template <class K, class D>
