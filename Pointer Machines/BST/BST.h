@@ -28,17 +28,7 @@ public:
 	virtual ~BST();
 	bool find(const K & key, D & dato);
 	bool insert(const K & key, const D & dato);
-	void remove(const K & key);
-
-	Node<K,D> *findMin(Node<K,D>* n)
-	{
-    	while(n->p_child[0]!=NULL)
-    	{
-    	    n=n->p_child[0];
-    	}
-   		return n;
-	}
-
+	void remove(K & key);
 	void print();
 private:
 	bool find(const K & key, Node<K,D>** &n);
