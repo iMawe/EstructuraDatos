@@ -10,9 +10,9 @@ void Queue<K,D>::Pop()
 }
 
 template <class K, class D>
-K Queue<K,D>::Top()
+void Queue<K,D>::Top()
 {
-	cout<<"top ->" << List.raiz->key << endl;
+	cout<<"top ->" << List.p_head->key << endl;
 	//return List.raiz->dato;
 }
 template <class K, class D>

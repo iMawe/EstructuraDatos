@@ -1,36 +1,81 @@
 #ifndef LINKEDLIST_H
 #define LINKEDLIST_H
 
-#include "Node.h"
 using namespace std;
 #include <iostream>
+
+template<class K, class D>
+class LinkedList;
+
+template <class K, class D>
+class Node
+{
+public: 
+	K key;
+private:
+	D dato;
+	Node<K,D>* siguiente;
+	Node<K,D>* anterior;
+public:
+	Node(){}
+
+	Node(const K & p_key, const D & p_dato, Node<K,D> * sig = NULL ){
+		key = p_key;
+		dato = p_dato;
+		siguiente = sig;
+		anterior = nullptr;
+	}
+
+	K GetKey();
+	D GetDato();
+	void  SetSiguiente(Node* p_node);
+	Node* GetAnterior()
+	{
+		return anterior;
+	}
+	Node* GetSiguiente()
+	{
+		return siguiente;
+	}
+	~Node();
+	void print();
+
+friend class LinkedList<K,D>;
+};
 
 template <class K, class D>
 class LinkedList
 {
 public:
 	Node<K,D>* p_head;
+private:
 	Node<K,D>* p_last;
 	Node<K,D>* sn;
-	Node<K,D>* aux;
+	Node<K,D>* p_free;
+	int idxfree;
 
 public:	
 	LinkedList();
-	LinkedList(const LinkedList & List);
+
+	LinkedList(const LinkedList<K,D>& List);
 
 	LinkedList & operator = (const LinkedList & List);
 
-	~LinkedList();
+	virtual ~LinkedList();
 
-	bool InsertFront(const K & p_key, const D & p_dato);
+	void InsertFront(const K & p_key, const D & p_dato);
+	void InsertBack(const K & p_key, const D & p_dato);
 
-	void Insert(const K & p_key, const D & p_dato);
-	
-	bool InsertBack(const K & p_key, const D & p_dato);
-	bool RemoveFront();
-	bool RemoveBack();
+	//void Insert(const K & p_key, const D & p_dato);
+
+	void RemoveFront();
+	void RemoveBack();
+
+	//void remove(const K & p_key, const D & p_dato);
+
 	void Show();
-	Node<K,D>* GetRaiz();
+	Node<K,D>* GetHead();
+	
 };
 
 #include "LinkedList.inl"

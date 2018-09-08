@@ -13,7 +13,7 @@ public:
 	Queue();
 	void PushBack(const K & p_key, const D & p_dato);
 	void Pop();
-	K Top();
+	void Top();
 	void Print();
 	~Queue();
 };

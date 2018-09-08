@@ -7,7 +7,7 @@ using namespace std;
 
 int main(){
 	LinkedList<int, int> list;
-	/*Queue<int,int> queue;
+	Queue<int,int> queue;
 	Stack<int,int> stack;
 
 	queue.PushBack(1,23);
@@ -26,9 +26,9 @@ int main(){
 	stack.Push(4,23);
 	stack.Pop();
 	stack.Top();
-	stack.Print();*/
+	stack.Print();	
 
-	list.Insert(1,23);
+	/*list.Insert(1,23);
 	list.Insert(2,12);
 	//list.InsertBack(3,45);
 	list.Show();
@@ -44,7 +44,7 @@ int main(){
 	//list.Show();
 	cout<<endl;
 	//list.InsertBack(7,23);
-	//list.Show();
+	//list.Show();*/
 
 	return 0;
 }

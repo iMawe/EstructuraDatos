@@ -11,9 +11,9 @@ void Stack<K,D>::Pop()
 }
 
 template <class K, class D>
-K Stack<K,D>::Top()
+void Stack<K,D>::Top()
 {
-	cout<<"top ->" << List.raiz->key << endl;
+	cout<<"top ->" << List.p_head->key << endl;
 	//return List.raiz->dato;
 }
 
