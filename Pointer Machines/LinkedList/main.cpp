@@ -1,4 +1,6 @@
 #include <iostream>
+#include <ctime>
+#include <cstdio>
 using namespace std;
 
 #include "LinkedList.h"
@@ -27,14 +29,14 @@ int main(){
 	stack.Pop();
 	stack.Top();
 	stack.Print();	
-
-	/*list.Insert(1,23);
-	list.Insert(2,12);
+/*
+	list.InsertFront(1,23);
+	list.InsertFront(2,12);
 	//list.InsertBack(3,45);
 	list.Show();
 	cout<<endl;
-	list.Insert(4,21);
-	list.Insert(5,48);
+	list.InsertFront(4,21);
+	list.InsertFront(5,48);
 	list.Show();
 	cout<<endl;
 	//list.RemoveFront();
@@ -44,7 +46,28 @@ int main(){
 	//list.Show();
 	cout<<endl;
 	//list.InsertBack(7,23);
-	//list.Show();*/
+	//list.Show();
+*/
+	/*const int N=1000000000;
+	int *aint;
+	for (int n = 10; n <= N; n*=10)
+	{
+		float ta=clock();
+		aint=new int[n];
+		for(int i=0; i<n; i++){
+			aint[i]=i*i;
+		}
+		delete []aint;
+		ta=clock()-ta;
+		float tl = clock();
+		LinkedList<int,int> * lint=new LinkedList<int,int>;
+		for(int i=0; i<n; i++){
+			lint->InsertFront(i*i,i+1);
+		}
+		delete lint;
+		tl=clock()-tl;
+		printf("%d %.3f %.3f \n", n, ta / CLOCKS_PER_SEC, tl / CLOCKS_PER_SEC);
+	}*/
 
 	return 0;
 }

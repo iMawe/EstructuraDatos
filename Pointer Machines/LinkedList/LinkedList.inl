@@ -1,5 +1,16 @@
+template<class K, class D>
+class LinkedList;
+
+template<class K, class D>
+Node<K,D>::Node(const K & p_key, const D & p_dato, Node<K,D> *sig){
+	key = p_key;
+	dato = p_dato;
+	siguiente = sig;
+	anterior = nullptr;
+}
+
 template <class K, class D>
-void Node<K,D>::SetSiguiente(Node* p_node)
+void Node<K,D>::SetSiguiente(Node<K,D>* p_node)
 {
 	siguiente = p_node;
 	
@@ -31,7 +42,7 @@ LinkedList<K,D>::LinkedList()
 {
 	p_head = nullptr;
 	p_last = nullptr;
-	sn = new Node<K,D>[100];
+	sn = new Node<K,D>[100000];
 	idxfree = 0;
 	p_free = nullptr;
 }
@@ -88,6 +99,7 @@ void LinkedList<K,D>::InsertFront(const K & p_key, const D & p_dato)
 	Node<K,D>* aux;
 	if(p_head == nullptr){//lista vacia
 		aux = &sn[idxfree];
+		aux->key = p_key;
 		aux->dato = p_dato;
 		p_head = aux;
 		p_last = aux;
@@ -95,12 +107,14 @@ void LinkedList<K,D>::InsertFront(const K & p_key, const D & p_dato)
 		idxfree++;
 	}
 	else if(p_free != nullptr){
+		p_free->key = p_key;
 		p_free->dato = p_dato;
 		p_free->siguiente = p_head;
 		p_head = p_free;
 	}
 	else{
 		aux = &sn[idxfree];
+		aux->key = p_key;
 		aux->dato = p_dato;
 		aux->siguiente = p_head;
 		p_head = aux;
@@ -191,6 +205,7 @@ void LinkedList<K,D>::InsertBack(const K & p_key, const D & p_dato){
 	Node<K,D>* aux;
 	if(p_head == nullptr){
 		aux = &sn[idxfree];
+		aux->key = p_key;
 		aux->dato = p_dato;
 		p_head = aux;
 		p_last = aux;
@@ -199,12 +214,14 @@ void LinkedList<K,D>::InsertBack(const K & p_key, const D & p_dato){
 		idxfree++;
 	}
 	else if(p_free != nullptr){
+		p_free->key = p_key;
 		p_free->dato = p_dato;
 		p_last->siguiente = p_free;
 		p_last = p_free;
 	}
 	else{
 		aux = &sn[idxfree];
+		aux->key = p_key;
 		aux->dato = p_dato;
 		p_last->siguiente = aux;
 		p_last = aux;

@@ -19,12 +19,7 @@ private:
 public:
 	Node(){}
 
-	Node(const K & p_key, const D & p_dato, Node<K,D> * sig = NULL ){
-		key = p_key;
-		dato = p_dato;
-		siguiente = sig;
-		anterior = nullptr;
-	}
+	Node(const K & p_key, const D & p_dato, Node<K,D> *sig = NULL );
 
 	K GetKey();
 	D GetDato();
@@ -52,7 +47,7 @@ private:
 	Node<K,D>* p_last;
 	Node<K,D>* sn;
 	Node<K,D>* p_free;
-	int idxfree;
+	int idxfree = 0;
 
 public:	
 	LinkedList();
