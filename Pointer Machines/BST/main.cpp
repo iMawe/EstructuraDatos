@@ -13,6 +13,7 @@ int main(){
 	int b= 41;
 	tree.removeP(41);
 	tree.print();
+	tree.printnivel();
 
 
 

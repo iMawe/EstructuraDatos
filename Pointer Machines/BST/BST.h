@@ -2,6 +2,8 @@
 #define BST_H
 
 using namespace std;
+#include <queue>
+
 
 template <class K,class D>
 class BST;
@@ -31,6 +33,7 @@ public:
 	void remove(K & key);
 	bool removeP(const K & key);
 	void print();
+	void printnivel();
 private:
 	bool find(const K & key, Node<K,D>** &n);
 	void remove(Node<K,D>** n, K key);

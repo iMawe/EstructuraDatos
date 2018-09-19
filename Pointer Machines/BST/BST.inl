@@ -168,3 +168,15 @@ bool BST<K,D>::removeP(const K & key){
 	*n = del->p_child[c];
 	delete del;
 }
+
+void BST<K,D>printnivel(){
+	queue<Node<K,D>*> l;
+    l.push( p_root );
+    while(!l.empty())
+    {
+        Node<K,D>* p = l.front();
+        l.pop();
+        cout<< p->key<<" ";
+        if(p->p_child[0]) l.push(p->p_child[0]);
+        if(p->p_child[1]) l.push(p->p_child[1]);
+}
