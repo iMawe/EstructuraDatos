@@ -11,7 +11,7 @@ int main(){
 		tree.insert(a,1);
 	}
 	int b= 41;
-	tree.remove(b);
+	tree.removeP(41);
 	tree.print();
 
 

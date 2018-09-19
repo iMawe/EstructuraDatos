@@ -145,3 +145,26 @@ void BST<K,D>::print(Node<K,D> *n){
         }
     }
 }
+
+template <class K, class D>
+bool BST<K,D>::removeP(const K & key){
+	Node<K,D> **n;
+	if(!find(key,n)) return false;
+	Node<K,D> *del = *n;
+	if((*n)->p_child[0] && (*n)->p_child[1]){
+		Node<K,D> **aux = &(*n)->p_child[0];
+		while((*aux)->p_child[1])
+			aux = &(*aux)->p_child[1];
+		if(*aux != (*n)->p_child[0]){
+			(*aux)->p_child[1] = (*n)->p_child[1];
+			swap((*aux)->p_child[0], (*n)->p_child[0]);
+			swap(*n, *aux);
+			n = aux;
+		}
+		else{(*aux)->p_child[1] = (*n)->p_child[1];}
+		del->p_child[1] = NULL;
+	}
+	bool c = del->p_child[0] == NULL;
+	*n = del->p_child[c];
+	delete del;
+}
