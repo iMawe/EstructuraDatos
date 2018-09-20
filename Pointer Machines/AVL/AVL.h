@@ -14,8 +14,8 @@ private:
 	int h;
 	Node<K,D>* p_child[2];
 public:
-	Node(const K k, const D d, h=0, Node<K,D>* children=NULL);
-	virtual ~Node();
+	Node(const K k, const D d, Node<K,D>* children=NULL);
+	virtual ~Node(){};
 
 friend class AVL<K,D>;
 };
@@ -26,12 +26,19 @@ private:
 	Node<K,D> *p_root;
 public:
 	AVL():p_root(NULL){};
-	virtual ~AVL();
-	bool insert(Node<K,D>** n, K key, D dato);
+	virtual ~AVL(){};
+
+	void insert(const K &key, const D &dato);
 	bool remove(K key);
+	int max(int a, int b);
 	int height(Node<K,D>* n);
+	void turn_side(Node<K,D>** n, bool dir);
+	void doble_turn_side(Node<K,D>** n, bool dir);
+	void balanceo(Node<K,D>** n);
+
 private:
-	bool insert(K key, D dato);
+	
+	bool insert(Node<K,D>** n, const K &key, const D &dato);
 
 };
 
