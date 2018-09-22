@@ -145,10 +145,10 @@ void AVL<K,D>::balanceo(Node<K,D>** p, K key){
 
 template<class K, class D>
 void AVL<K,D>::printARBOL(){
-    cout<<"graph {"<<endl;
-    cout<<p_root->dato<<endl;
+    os<<"graph {"<<endl;
+    os<<p_root->dato<<endl;
     printARBOL(p_root);
-    cout<<"}";
+    os<<"}";
     system("dot.lnk -Tpng -o < grap.dot > out2.png");
 }
 
@@ -158,15 +158,15 @@ template<class K, class D>
 void AVL<K,D>::printARBOL(Node<K,D> *n){
     if(n!=NULL){
         if(n->p_child[0]!=NULL){
-            cout<<n->dato;
-            cout<<"--";
-            cout<<n->p_child[0]->dato<<endl;
+            os<<n->dato;
+            os<<"--";
+            os<<n->p_child[0]->dato<<endl;
             printARBOL(n->p_child[0]);
         }
         if(n->p_child[1]!=NULL){
-            cout<<n->dato;
-            cout<<"--";
-            cout<<n->p_child[1]->dato<<endl;
+            os<<n->dato;
+            os<<"--";
+            os<<n->p_child[1]->dato<<endl;
             printARBOL(n->p_child[1]);
         }
     }
