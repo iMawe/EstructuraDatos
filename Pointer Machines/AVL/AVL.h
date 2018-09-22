@@ -1,6 +1,7 @@
 #ifndef AVL_H
 #define AVL_H
 
+#include <iostream>
 using namespace std;
 
 template <class K,class D>
@@ -35,10 +36,12 @@ public:
 	void turn_side(Node<K,D>** n, bool dir);
 	void doble_turn_side(Node<K,D>** n, bool dir);
 	void balanceo(Node<K,D>** n);
+	void printARBOL();
 
 private:
 	
 	bool insert(Node<K,D>** n, const K &key, const D &dato);
+	void printARBOL(node<K,D> *n);
 
 };
 

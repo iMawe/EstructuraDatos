@@ -71,7 +71,7 @@ bool AVL<K,D>::insert(Node<K,D>** p, const K &key, const D &d){
 }
 
 template<class K, class D>
-void AVL<K,D>::balanceo(Node<K,D>** n){
+void AVL<K,D>::balanceo(Node<K,D>** p){
 	if( height( (*p)->p_child[0] ) - height( (*p)->p_child[1] ) == 2 )
 	    if( key < (*p)->p_child[0]->key )
 	        turn_side(p, 0);
@@ -82,5 +82,34 @@ void AVL<K,D>::balanceo(Node<K,D>** n){
             turn_side(p, 1);
         else
             doble_turn_side(p, 1);
+    }
+}
+
+template<class K, class D>
+void AVL<K,D>::printARBOL(){
+    os<<"graph {"<<endl;
+    os<<p_root->dato<<endl;
+    printARBOL(p_root);
+    os<<"}";
+    system("dot.lnk -Tpng -o < grap.dot > out2.png");
+}
+
+
+
+template<class K, class D>
+void AVL<K,D>::printARBOL(Node<K,D> *n){
+    if(n!=NULL){
+        if(n->p_child[0]!=NULL){
+            os<<n->dato;
+            os<<"--";
+            os<<n->p_child[0]->dato<<endl;
+            printARBOL(n->p_child[0]);
+        }
+        if(n->p_child[1]!=NULL){
+            os<<n->dato;
+            os<<"--";
+            os<<n->p_child[1]->dato<<endl;
+            printARBOL(n->p_child[1]);
+        }
     }
 }
