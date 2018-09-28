@@ -8,8 +8,9 @@ Node<K,D>::Node(const K k, const D d, Node<K,D> * children){
 }
 
 template <class K, class D>
-int AVL<K,D>::height(Node<K,D> *n){
-	return n == NULL ? -1 : n->h;
+int AVL<K,D>::height(Node<K,D> *p){
+	recalc(p);
+	return p == NULL ? -1 : p->h;
 }
 
 template <class K, class D>
@@ -17,56 +18,77 @@ int AVL<K,D>::max( int a, int b ){
     return a > b ? a : b;
 }
 
-template<class K, class D>
-void AVL<K,D>::turn_side(Node<K,D>** n, bool dir)
+template<class K,class D>
+Node<K,D>* AVL<K,D>::Min(Node<K,D> **p)
 {
-    Node<K,D>* tmp = (*n);
-    (*n) = (*n)->p_child[dir];
-    tmp->p_child[dir] = (*n)->p_child[!dir];
-    (*n)->p_child[!dir] = tmp;
+    if(*p == NULL)
+        return NULL;
+    else if((*p)->p_child[0] == NULL)
+        return *p;
+    else
+        return Min(&(*p)->p_child[0]);
+}
+
+template<class K, class D>
+void AVL<K,D>::turn_side(Node<K,D>** p, bool dir)
+{
+    Node<K,D>* tmp = (*p);
+    (*p) = (*p)->p_child[dir];
+    tmp->p_child[dir] = (*p)->p_child[!dir];
+    (*p)->p_child[!dir] = tmp;
 }
 template<class K, class D>
-void AVL<K,D>::doble_turn_side(Node<K,D>** n, bool dir)
+void AVL<K,D>::doble_turn_side(Node<K,D>** p, bool dir)
 {
-    turn_side(&(*n)->p_child[dir], !dir);
-    turn_side(n, dir);
+    turn_side(&(*p)->p_child[dir], !dir);
+    turn_side(p, dir);
+}
+
+template<class K,class D>
+void AVL<K,D>::find(K key){
+    Node<K,D> **aux;
+    if(find(key, aux) == true){
+        cout<< "elemento " << key << " a sido encontrado" <<endl;
+    }else{
+        cout<< key << " Elemento no encontrado";
+    }
+
+}
+
+template<class K,class D>
+bool AVL<K,D>::find(K key,Node<K,D> **&tmp){
+    tmp = &p_root;
+    while(*tmp){
+       
+            if((*tmp)->key == key){
+                return true;
+            } 
+            tmp = &(*tmp)->p_child[((*tmp)->key < key)];
+       }
+    return false;
 }
 
 template<class K, class D>
 void AVL<K,D>::insert(const K & key, const D & dato){
+
 	insert(&p_root, key, dato);
 }
 
 template<class K, class D>
 bool AVL<K,D>::insert(Node<K,D>** p, const K &key, const D &d){
-   if ((*p) == NULL) {
-        (*p) = new Node<K,D>(key, d);
+   if(*p==NULL){ 
+        *p=new Node<K,D>(key, 1); 
+        (*p)->key = key; 
         return true;
     }
-    else if( key < (*p)->key ){
-        insert(&(*p)->p_child[0], key, d );
-        if(height( (*p)->p_child[0] ) - height( (*p)->p_child[1] ) == 2 )
-	        if( key < (*p)->p_child[0]->key )
-	            turn_side(p, 0);
-	        else
-	            doble_turn_side(p, 0);
-	    return true;
-    }
-    else if((*p)->key < key ){
-        insert(&(*p)->p_child[1], key, d );
-        if(height( (*p)->p_child[1] ) - height( (*p)->p_child[0] ) == 2 ){
-            if( (*p)->p_child[1]->key < key )
-                turn_side(p, 1);
-            else
-                doble_turn_side(p, 1);
-        }
-        return true;
-    }
-    else
-        ;
-    (*p)->h = max(height( (*p)->p_child[0] ), height( (*p)->p_child[1] ) ) + 1; 
 
-    return true;
+    if((*p)->key == key)
+    	return false;
+
+    bool dir = (*p)->key < key;
+
+    if(insert(&(*p)->p_child[dir], key, d))
+    	balanceo(p, dir);
 
 }
 
@@ -86,33 +108,38 @@ void AVL<K,D>::remove(K key){
 
 template<class K, class D>
 bool AVL<K,D>::remove(Node<K,D>** p, K key){
-    if(!(*p))  
-    	return false;  
-    if((*p)->key > key){  
-    	remove(&(*p)->p_child[0], key);  
-    }  
-    else if((*p)->key < key){  
-    	remove(&(*p)->p_child[1], key);  
-    }  
-    else{
-    	if ((*p)->p_child[0] == NULL)
-    		(*p) = (*p)->p_child[1];
+    Node<K,D>* temp;
+    if (*p == NULL)
+        return false;
 
-        else if ((*p)->p_child[1] == NULL)
-            (*p) = (*p)->p_child[0];
+    if((*p)->key == key){
+        if((*p)->p_child[0] && (*p)->p_child[1]){
+            
+            temp = Min(&(*p)->p_child[1]);
+            (*p)->key = temp->key;
+            remove(&(*p)->p_child[1], (*p)->key); 
+        }
 
-       	else{
-	    int keyaux = getMinValue((*p)->p_child[1]);
-	    (*p)->key = keyaux;
-	    remove(&(*p)->p_child[1], keyaux);
-        } 
+        else{
+            temp = *p;
+            if((*p)->p_child[0] == NULL)
+                *p = (*p)->p_child[1];
+            
+            else if((*p)->p_child[1]== NULL)
+                *p = (*p)->p_child[0];
+            
+            delete temp;
+        }
+
+        if(*p==NULL)
+            return false;
+        
     }
-
-    if ((*p) == NULL) return false;
-
-	balanceo(p, (*p)->key);
-    return true; 
+    bool dir = (*p)->key < key; 
+    if(remove(&(*p)->p_child[dir],key))
+        return balanceo(p, dir);
 }
+
 template<class K, class D>
 int AVL<K,D>::get_balance(Node<K,D>* p){  
    if(!p)  
@@ -127,47 +154,62 @@ void AVL<K,D>::recalc(Node<K,D>* p)
 }
 
 template<class K, class D>
-void AVL<K,D>::balanceo(Node<K,D>** p, K key){
-	recalc(*p);
+bool AVL<K,D>::balanceo(Node<K,D>** p, bool dir){
+    Node<K,D> * tmp  = (*p)->p_child[dir];
 
-	if( height( (*p)->p_child[0] ) - height( (*p)->p_child[1] ) == 2 )
-	    if( key < (*p)->p_child[0]->key )
-	        turn_side(p, 0);
-	    else
-	        doble_turn_side(p, 0);
-	else if( height( (*p)->p_child[1] ) - height( (*p)->p_child[0] ) == 2 ){
-        if( (*p)->p_child[1]->key < key )
-            turn_side(p, 1);
-        else
-            doble_turn_side(p, 1);
+    int hp = height((*p)->p_child[0])-height((*p)->p_child[1]);
+    int htmp = height(tmp->p_child[0])-height(tmp->p_child[1]);
+        
+    if (hp == -2 or hp == 2){
+        if (hp * htmp <= 0)
+            turn_side(&(*p)->p_child[dir], !dir);
+
+        turn_side(p, dir);
+
+        return false;
     }
+    return true;
 }
 
 template<class K, class D>
-void AVL<K,D>::printARBOL(){
-    os<<"graph {"<<endl;
-    os<<p_root->dato<<endl;
-    printARBOL(p_root);
-    os<<"}";
-    system("dot.lnk -Tpng -o < grap.dot > out2.png");
+void AVL<K,D>::printARBOL(int p){
+    string num_arch = to_string(num);
+	string ext1 = ".dot";
+	string num_xt1=""+ num_arch +""+ ext1 +"";
+	ofstream es(num_xt1);
+	////////
+	string s = to_string(num);
+	string pt1="dot.lnk -Tpng  < ";
+	string pt2=" > ";
+	string pt3=".png";
+	string rt=""+ pt1 +""+ num_xt1 +""+ pt2 +""+ s +""+ pt3 +"";
+	const char *buffer = rt.c_str();
+	////////
+	es<<"graph {"<<endl;
+	es<<p_root->key<<endl;
+	printARBOL(es,p_root);
+	es<<"}"<<endl;
+	es.close();
+	system(buffer);
 }
 
 
 
 template<class K, class D>
-void AVL<K,D>::printARBOL(Node<K,D> *n){
-    if(n!=NULL){
-        if(n->p_child[0]!=NULL){
-            os<<n->dato;
+void AVL<K,D>::printARBOL(ofstream & os, node<K,D> *p){
+    if(p!=NULL)
+    {    
+        if(p->p_child[0]!=NULL){
+            os<<p->key;
             os<<"--";
-            os<<n->p_child[0]->dato<<endl;
-            printARBOL(n->p_child[0]);
+            os<<p->p_child[0]->key<<endl;
+            printOficial(os,p->p_child[0]);
         }
-        if(n->p_child[1]!=NULL){
-            os<<n->dato;
+        if(p->p_child[1]!=NULL){
+            os<<p->key;
             os<<"--";
-            os<<n->p_child[1]->dato<<endl;
-            printARBOL(n->p_child[1]);
+            os<<p->p_child[1]->key<<endl;
+            printOficial(os,p->p_child[1]);
         }
     }
 }
