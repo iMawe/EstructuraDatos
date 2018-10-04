@@ -10,7 +10,8 @@ int main(){
     treerb[7] = 2;
     treerb[90] = 2;
     treerb[4] = 2;
-    treerb.printARBOL(2);
+    treerb.remove(7,0);
+    treerb.draw();
 
 
     return 0;

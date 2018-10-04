@@ -117,12 +117,18 @@ bool RB<K,D>::successor(Node<K,D> *nodo, Node<K,D> *sucesor){
     return true;
 }
 
+template<class K,class D>
+bool RB<K,D>::remove(const K & key,const D & data){
+    remove(key, data, &p_root, NULL);
+    return true;
+}
+
 template<class K, class D>
 Node<K,D> * RB<K,D>::remove(const K & key,const D & data, Node<K,D> ** n, Node<K,D> ** p){
     Node<K,D> *tmp;
-    if(!(*n)){
+    if(!(*n))
         return NULL;
-    }
+    
     if((*n)->key==key){
         if((*n)->p_child[0] and (*n)->p_child[1]){
             tmp = min(&(*n)->p_child[1]);
@@ -153,17 +159,17 @@ Node<K,D> * RB<K,D>::remove(const K & key,const D & data, Node<K,D> ** n, Node<K
     if(!p){
         return NULL;
     }
-    if((is_red(child)==RED) and (is_red(*n)==RED)){
+    if(is_red(child) and is_red(*n)){
         bool idx_parent = ((*p)->p_child[1] == (*n));
         Node<K,D> *uncle = (*p)->p_child[!idx_parent];
-        if(is_red(uncle)==RED){
+        if(is_red(uncle)){
             (*n)->color = BLACK;
             uncle->color = BLACK;
             (*p)->color = RED;
             p_root->color = BLACK;
             return (*n);
         }
-        if(is_black(uncle)==BLACK){
+        if(is_black(uncle)){
             if(idx_child!=idx_parent){
                 turn_side(n,idx_child);
                 turn_side(p,idx_parent);
@@ -173,7 +179,7 @@ Node<K,D> * RB<K,D>::remove(const K & key,const D & data, Node<K,D> ** n, Node<K
                 p_root->color = BLACK;
             }
             else{
-                turnSide(p,idx_parent);
+                turn_side(p,idx_parent);
                 (*p)->color = BLACK;
                 (*p)->p_child[!idx_parent]->color = RED;
                 p_root->color = BLACK;
@@ -232,9 +238,8 @@ bool RB<K,D>::draw(Node<K,D> *n, ofstream & os){
     os.open("Red-Back_tree.txt");
     os <<"digraph { "<<endl;
     q.push(p_root);
-    cout<<q.empty()<<endl;
     while(!q.empty()){
-        cout<<"q.front: "<<q.front()<<endl;
+        
         int level = q.size();
         while( level > 0){
             Node<K,D> **temp;
@@ -248,12 +253,10 @@ bool RB<K,D>::draw(Node<K,D> *n, ofstream & os){
             if((*temp)->p_child[0]){
                 q.push((*temp)->p_child[0]);
                 os<<"   "<<(*temp)->key<<" -> "<<(*temp)->p_child[0]->key<<endl;
-                cout<<"   "<<(*temp)->key<<" "<<(*temp)->color<<" -> "<<(*temp)->p_child[0]->key<<" "<<(*temp)->p_child[0]->color<<endl;
             }
             if((*temp)->p_child[1]){
                 q.push((*temp)->p_child[1]);
                 os<<"   "<<(*temp)->key<<" -> "<<(*temp)->p_child[1]->key<<endl;
-                cout<<"   "<<(*temp)->key<<" "<<(*temp)->color<<" -> "<<(*temp)->p_child[1]->key<<" "<<(*temp)->p_child[1]->color<<endl;
             }
             level--;
         }
