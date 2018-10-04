@@ -1,7 +1,19 @@
 digraph { 
-   17 -> 4
-   17 -> 90
+   13 -> 4
+   13 -> 17
+   4 -> 5
    {
-   4 [shape=circle, color=red]
+   17 [shape=circle, color=red]
+   }
+   17 -> 16
+   17 -> 28
+   28 -> 24
+   {
+   24 [shape=circle, color=red]
+   }
+   24 -> 22
+   22 -> 20
+   {
+   20 [shape=circle, color=red]
    }
 }
