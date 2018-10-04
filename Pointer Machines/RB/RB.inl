@@ -286,7 +286,7 @@ void RB<K,D>::printARBOL(int num){
     ofstream es(num_xt1);
     ////////
     string s = to_string(num);
-    string pt1="dot.lnk -Tpng  < ";
+    string pt1="dot.exe.lnk -Tpng  < ";
     string pt2=" > ";
     string pt3=".png";
     string rt=""+ pt1 +""+ num_xt1 +""+ pt2 +""+ s +""+ pt3 +"";

@@ -1,0 +1,29 @@
+digraph mentions {
+31 -> 21
+21 -> 9
+9 -> 2
+2 -> 1
+2 -> 6
+9 -> 10
+10 -> 14
+21 -> 25
+25 -> 30
+31 -> 35
+35 -> 34
+35 -> 41
+41 -> 37
+31[style=filled, fillcolor=black, fontcolor=white]
+21[style=filled, fillcolor=red]
+9[style=filled, fillcolor=black, fontcolor=white]
+2[style=filled, fillcolor=black, fontcolor=white]
+1[style=filled, fillcolor=red]
+6[style=filled, fillcolor=red]
+10[style=filled, fillcolor=black, fontcolor=white]
+14[style=filled, fillcolor=red]
+25[style=filled, fillcolor=black, fontcolor=white]
+30[style=filled, fillcolor=red]
+35[style=filled, fillcolor=black, fontcolor=white]
+34[style=filled, fillcolor=black, fontcolor=white]
+41[style=filled, fillcolor=black, fontcolor=white]
+37[style=filled, fillcolor=red]
+}

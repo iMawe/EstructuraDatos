@@ -13,15 +13,15 @@ int main(){
 
 
     for(int i=1;i<30;i++){
-        iSecret = rand() % 30 + 1;
+        iSecret = rand() % 50 + 1;
         treerb[iSecret] = i;  
     }
 
     for(int j=31;j<50;j++){
-        jSecret = rand() % 30 + 1;
+        jSecret = rand() % 50 + 1;
     	treerb.remove(jSecret, 0);
     }
-    treerb.draw();
+    treerb.printARBOL(50);
 
 
     return 0;
