@@ -170,7 +170,7 @@ bool AVL<K,D>::balanceo(Node<K,D>** p, bool dir){
     }
     return true;
 }
-
+ 
 template<class K, class D>
 void AVL<K,D>::printARBOL(int p){
     string num_arch = to_string(num);
@@ -195,7 +195,7 @@ void AVL<K,D>::printARBOL(int p){
 
 
 
-template<class K, class D>
+template<class K, class D> 
 void AVL<K,D>::printARBOL(ofstream & os, node<K,D> *p){
     if(p!=NULL)
     {    
