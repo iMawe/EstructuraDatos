@@ -10,7 +10,7 @@ int main(){
     treerb[7] = 2;
     treerb[90] = 2;
     treerb[4] = 2;
-    treerb.print();
+    treerb.printARBOL(2);
 
 
     return 0;

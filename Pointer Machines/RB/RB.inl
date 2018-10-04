@@ -153,17 +153,17 @@ Node<K,D> * RB<K,D>::remove(const K & key,const D & data, Node<K,D> ** n, Node<K
     if(!p){
         return NULL;
     }
-    if((getColor(child)==RED) and (getColor(*n)==RED)){
+    if((is_red(child)==RED) and (is_red(*n)==RED)){
         bool idx_parent = ((*p)->p_child[1] == (*n));
         Node<K,D> *uncle = (*p)->p_child[!idx_parent];
-        if(getColor(uncle)==RED){
+        if(is_red(uncle)==RED){
             (*n)->color = BLACK;
             uncle->color = BLACK;
             (*p)->color = RED;
             p_root->color = BLACK;
             return (*n);
         }
-        if(getColor(uncle)==BLACK){
+        if(is_black(uncle)==BLACK){
             if(idx_child!=idx_parent){
                 turn_side(n,idx_child);
                 turn_side(p,idx_parent);
