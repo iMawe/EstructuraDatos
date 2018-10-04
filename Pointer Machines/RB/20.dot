@@ -1,0 +1,41 @@
+digraph mentions {
+8 -> 4
+4 -> 2
+2 -> 1
+2 -> 3
+4 -> 6
+6 -> 5
+6 -> 7
+8 -> 12
+12 -> 10
+10 -> 9
+10 -> 11
+12 -> 16
+16 -> 14
+14 -> 13
+14 -> 15
+16 -> 18
+18 -> 17
+18 -> 19
+19 -> 20
+8[style=filled, fillcolor=black, fontcolor=white]
+4[style=filled, fillcolor=red]
+2[style=filled, fillcolor=black, fontcolor=white]
+1[style=filled, fillcolor=black, fontcolor=white]
+3[style=filled, fillcolor=black, fontcolor=white]
+6[style=filled, fillcolor=black, fontcolor=white]
+5[style=filled, fillcolor=black, fontcolor=white]
+7[style=filled, fillcolor=black, fontcolor=white]
+12[style=filled, fillcolor=red]
+10[style=filled, fillcolor=black, fontcolor=white]
+9[style=filled, fillcolor=black, fontcolor=white]
+11[style=filled, fillcolor=black, fontcolor=white]
+16[style=filled, fillcolor=black, fontcolor=white]
+14[style=filled, fillcolor=red]
+13[style=filled, fillcolor=black, fontcolor=white]
+15[style=filled, fillcolor=black, fontcolor=white]
+18[style=filled, fillcolor=red]
+17[style=filled, fillcolor=black, fontcolor=white]
+19[style=filled, fillcolor=black, fontcolor=white]
+20[style=filled, fillcolor=red]
+}

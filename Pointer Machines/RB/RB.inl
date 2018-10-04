@@ -10,6 +10,7 @@ Node<K,D> * RB<K,D>::insert(const K & _key, const D & _data, Node<K,D> ** n,  No
     if(!(*n)){
         (*n) = new Node<K,D>(_key,_data);
         (*n)->color = RED;
+        p_root->color = BLACK;
         return (*n);
     }
     if((*n)->key == _key) return NULL;
@@ -26,7 +27,7 @@ Node<K,D> * RB<K,D>::insert(const K & _key, const D & _data, Node<K,D> ** n,  No
             (*n)->color = BLACK;
             uncle->color = BLACK;
             (*p)->color = RED;
-            p_root->color =BLACK;
+            p_root->color = BLACK;
             return (*n );
         }
         if(is_black(uncle)){

@@ -1,0 +1,51 @@
+digraph mentions {
+8 -> 4
+4 -> 2
+2 -> 1
+2 -> 3
+4 -> 7
+7 -> 5
+8 -> 16
+16 -> 12
+12 -> 10
+10 -> 9
+10 -> 11
+12 -> 14
+14 -> 13
+16 -> 21
+21 -> 18
+18 -> 17
+18 -> 19
+21 -> 24
+24 -> 22
+22 -> 23
+24 -> 26
+26 -> 25
+26 -> 28
+28 -> 27
+8[style=filled, fillcolor=black, fontcolor=white]
+4[style=filled, fillcolor=black, fontcolor=white]
+2[style=filled, fillcolor=black, fontcolor=white]
+1[style=filled, fillcolor=black, fontcolor=white]
+3[style=filled, fillcolor=black, fontcolor=white]
+7[style=filled, fillcolor=black, fontcolor=white]
+5[style=filled, fillcolor=black, fontcolor=white]
+16[style=filled, fillcolor=black, fontcolor=white]
+12[style=filled, fillcolor=red]
+10[style=filled, fillcolor=black, fontcolor=white]
+9[style=filled, fillcolor=black, fontcolor=white]
+11[style=filled, fillcolor=black, fontcolor=white]
+14[style=filled, fillcolor=black, fontcolor=white]
+13[style=filled, fillcolor=black, fontcolor=white]
+21[style=filled, fillcolor=red]
+18[style=filled, fillcolor=black, fontcolor=white]
+17[style=filled, fillcolor=black, fontcolor=white]
+19[style=filled, fillcolor=black, fontcolor=white]
+24[style=filled, fillcolor=black, fontcolor=white]
+22[style=filled, fillcolor=red]
+23[style=filled, fillcolor=black, fontcolor=white]
+26[style=filled, fillcolor=red]
+25[style=filled, fillcolor=black, fontcolor=white]
+28[style=filled, fillcolor=black, fontcolor=white]
+27[style=filled, fillcolor=red]
+}

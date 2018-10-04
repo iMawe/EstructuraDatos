@@ -1,0 +1,5 @@
+digraph mentions {
+1 -> 2
+1[style=filled, fillcolor=black, fontcolor=white]
+2[style=filled, fillcolor=red]
+}
