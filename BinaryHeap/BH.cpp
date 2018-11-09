@@ -6,7 +6,7 @@
 using namespace std;
 
 template <class T, size_t cap = 100>
-class BH
+class BH|
 {
     private:
         T * elems;
