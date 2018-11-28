@@ -1,3 +1,4 @@
+//iMawe
 #include <iostream>
 #include <cstdio>
 #include <cstring>
@@ -64,7 +65,7 @@ int main(){
         }		
   		sort(arista.begin(), arista.end(), ismin);
         vector<float> tamx;
-        for (int i=0, nX=0; nX!=p-1; i++){
+        for (int i=0, nX=0; nX != p-1; i++){
             if (join(arista[i],tamx)){
             	nX++;
             }

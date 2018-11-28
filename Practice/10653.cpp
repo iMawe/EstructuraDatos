@@ -39,11 +39,11 @@ void bfs(pair<int,int> s,pair<int,int> d)
 
             if(x >= 0 && x < row && y >= 0 && y < col && cell[x][y] != -1 && visited[x][y] == -1)
             {
-                visited[x][y]=visited[a.first][a.second]+1;
-                u=make_pair(x,y);
+                visited[x][y] = visited[a.first][a.second]+1;
+                u = make_pair(x,y);
                 q.push(u);
             }
-            if(a.first==d.first&&a.second==d.second) break;
+            if(a.first == d.first&&a.second == d.second) break;
         }
     }
     cout<< visited[d.first][d.second]-visited[s.first][s.second]<<endl ;
