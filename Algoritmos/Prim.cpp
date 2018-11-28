@@ -45,8 +45,7 @@ int prim(int n) {
     return total;    
 }
 
-int main()
-{
+int main(){
     int E;
 	cin>>N>>E;
     
