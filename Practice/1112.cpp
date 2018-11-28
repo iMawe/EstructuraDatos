@@ -16,19 +16,19 @@ int dijkstra(int src ){
     for(int i = 1; i <= N; i++) dist[i] = Inf;
     Q.push( pii(src, 0));
     dist[src] =0;
-    int from, to, t, cost;
+    int a, b, t, c;
     while(!Q.empty()){
-        from = Q.top().first;
-        cost = Q.top().second;
+        a = Q.top().first;
+        c = Q.top().second;
         Q.pop();
 
-        if(dist[from] == cost && dist[from] <= T)
-            for(int i = 0; i < (int) g[from].size(); i++){
-                to = g[from][i].first;
-                t = g[from][i].second;
-                if(dist[from] + t < dist[to]){
-                    dist[to] = dist[from] + t;
-                    Q.push(pii(to, dist[to]));
+        if(dist[a] == c && dist[a] <= T)
+            for(int i = 0; i < (int) g[a].size(); i++){
+                b = g[a][i].first;
+                t = g[a][i].second;
+                if(dist[a] + t < dist[b]){
+                    dist[b] = dist[a] + t;
+                    Q.push(pii(b, dist[b]));
                 }
             }
     }
@@ -38,18 +38,17 @@ int dijkstra(int src ){
     return mices;
 }
 int main(){
-    int E, M;
-    int test, from, to, t;
-    scanf("%d", &test);
-    while(test--){
+    int E, M, n, a, b, t;
+    scanf("%d", &n);
+    while(n--){
         scanf("%d %d %d", &N, &E, &T);
         scanf("%d", &M);
         for(int i = 0; i < M; i++){
-            scanf("%d %d %d", &from, &to, &t);
-            g[to].push_back(pii(from, t));
+            scanf("%d %d %d", &a, &b, &t);
+            g[b].push_back(pii(a, t));
         }
     printf("%d\n", dijkstra(E));
-    if(test)puts("");
+    if(n)puts("");
     for(int i = 1; i <= N; i++) g[i].clear();
     }
 
