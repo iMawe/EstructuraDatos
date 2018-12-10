@@ -3,61 +3,70 @@
 
 ![IMAGE](https://github.com/iMawe/EstructuraDatos/blob/master/K-D%20Tree/Files/kdtree.png?raw=true)
 
-- En ciencias de la computación, un Árbol kd (abreviatura de árbol k-dimensional) es una estructura de datos de particionado del espacio que organiza los puntos en un Espacio euclídeo de k dimensiones. 
-- Un árbol kd emplea sólo planos perpendiculares a uno de los ejes del sistema de coordenadas.
-- Todos los nodos de un árbol kd, desde el nodo raíz hasta los nodos hoja, almacenan un punto.
-- La idea es mantener la noción de un árbol binario, pero cortando el espacio usando un solo hiperplano ortogonal. En cada nivel del árbol variamos el eje de corte
+- In computer science, a kd Tree (abbreviation of k-dimensional tree) is a data structure structure of the space that organizes the points in a Euclidean space of k dimensions.
+- A kd tree uses only planes perpendicular to one of the axes of the coordinate system.
+- All the nodes of a kd tree, from the root node to the leaf nodes, store a point.
+- The idea is to maintain the notion of a binary tree, but cutting the space using a single orthogonal hyperplane. At each level of the tree we vary the cutting axis
 
-Por ejemplo:
+For example:
 
-En 2 dimensiones en la raíz cortamos perpendicular al eje x; en el siguiente nivel cortamos perpendicular al
-eje y, etc.
+In 2 dimensions at the root we cut perpendicular to the x axis; on the next level we cut perpendicular to
+axis and, etc.
 
 ![IMAGE](https://github.com/iMawe/EstructuraDatos/blob/master/K-D%20Tree/Files/kdtree2.png?raw=true)
 
-Para representar esta estructura, se guarda un nodo por cada corte hecho. Cada nodo tiene 2
-hijos. Todos los puntos menores que el punto de corte actual p, de acuerdo al eje discriminado,
-se guardan en los hijos de la izquierda, y en los de la derecha los mayores ( si el eje de un punto
-es igual a p, se puede insertar en cualquiera de los dos hijos. Esto es para tratar de balancear los
-subárboles ). Cuando se llega a un punto o a un número peque~no de puntos (menor o igual al
-tama~no del bucket), se almacena en las hojas.
+To represent this structure, a node is saved for each cut made. Each node has 2
+children. All points smaller than the current cut point p, according to the discriminated axis,
+they are saved in the children of the left, and in the ones of the right the majors (if the axis of a point
+is equal to p, can be inserted in any of the two children. This is to try to balance the
+subtrees). When you reach a point or a small number of points (less than or equal to
+size of the bucket), it is stored in the leaves.
 
-**¿Cómo elegimos el valor de corte?** 
+**How do we choose the cut value?**
 
-Para un mejor rendimiento, la descomposición del espacio
-deberá ser lo más balanceada posible. El método más común utilizado para ello es seleccionar
-el valor de corte basado en la mediana del eje de corte. Esto produce un árbol de altura *O*(log n).
-Con un procedimiento recursivo se puede construir el árbol en *O*(n log n). El costo más alto es
-determinar la mediana del eje.
+For better performance, the decomposition of space
+It should be as balanced as possible. The most common method used for this is to select
+the cutoff value based on the median of the cutting axis. This produces a tree of height * O * (log n).
+With a recursive procedure you can build the tree in * O * (n log n). The highest cost is
+determine the median of the axis.
 
-**Consulta del Vecino más próximo**
+**Consultation of the nearest Neighbor**
 
-Dado un punto de consulta *q*, para buscar el vecino
-más práximo primero descendemos por el árbol. Mantenemos un punto candidato a ser el más
-práximo *nn* y una distancia de valor máximo *dist*. Para cada nodo visitado revisamos este punto,
-actualizándolo en caso necesario.
-Luego necesitamos chequear los subárboles. Si *q* está en el lado inferior del hiperplano, nos
-vamos a la izquierda, en caso contrario a la derecha. Después de visitar el subárbol izquierdo
-hemos modificado el punto candidato *nn* y la distancia a este punto *dist*.
+Given a query point * q *, to look for the neighbor
+Next, first, we descend through the tree. We keep a candidate point to be the most
+next * nn * and a distance of maximum value * dist *. For each visited node we review this point,
+updating it if necessary.
+Then we need to check the subtrees. If * q * is on the underside of the hyperplane, we
+we go to the left, otherwise to the right. After visiting the left subtree
+we have modified the candidate point * nn * and the distance to this point * dist *.
 
-## **Usos KDTree**
+## ** Uses KDTree **
 
-**Búsqueda ortogonal en un árbol kd**
+**Orthogonal search in a kd tree**
 
-Usar un KDTree para encontrar todos los puntos que se encuentran en un rectángulo determinado (o análogo de más dimensiones). Esta operación también se denomina rango de búsqueda ortogonal.
+Use a KDTree to find all the points that are in a certain rectangle (or analog of more dimensions). This operation is also called the orthogonal search range.
 
-**Determinar dónde evaluar una superficie**
-En las regresiones locales es común evaluar la superficie contenida directamente sólo por los vértices del KDTree e interpolar en algún punto. Este uso, reflejado en la imagen de arriba, busca asegurar que sólo se realizarán las evaluaciones directas necesarias. Como los KDTree se "adaptan" al espacio, este método puede suministrar una excelente aproximación a las verdaderas superficies de regresión local. Si la aproximación es pobre, puede mejorarse con más subdivisiones.
+**Determine where to evaluate a surface**
 
+In local regressions it is common to evaluate the surface contained directly only by the vertices of the KDTree and interpolate at some point. This use, reflected in the image above, seeks to ensure that only the necessary direct evaluations will be made. As the KDTree "adapt" to space, this method can provide an excellent approximation to the true local regression surfaces. If the approach is poor, it can be improved with more subdivisions.
 
-
-
-
+## **Requirements**
 
 
 
 
 
+
+
+
+## **References**
+
+- http://www.cic.ipn.mx/aguzman/papers/89%20Arboles%20kd.htm
+- https://es.wikipedia.org/wiki/%C3%81rbol_kd
+- https://prezi.com/4lviwf2r7zoe/kd-tree/
+- https://www.geeksforgeeks.org/k-dimensional-tree/
+- https://www.geeksforgeeks.org/k-dimensional-tree-set-3-delete/
+- https://www.mathworks.com/help/stats/kdtreesearcher.html
 
 
 
