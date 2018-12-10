@@ -65,6 +65,7 @@ In local regressions it is common to evaluate the surface contained directly onl
 - https://es.wikipedia.org/wiki/%C3%81rbol_kd
 - https://prezi.com/4lviwf2r7zoe/kd-tree/
 - https://www.geeksforgeeks.org/k-dimensional-tree/
+- https://www.geeksforgeeks.org/k-dimensional-tree-set-3-delete/
 - https://www.mathworks.com/help/stats/kdtreesearcher.html
 
 
