@@ -14,11 +14,11 @@ public:
     virtual ~KDTree();
  
     KDNode* getRoot();
+    KDNode* masProximo(KDNode* nwnode);
     
     void print();
-    void insert(KDNode* newEntry);
-    void remove(KDNode* entry);
-    
+    void insert(KDNode* newN);
+    void remove(KDNode* nwnode);
     
 private:
     KDNode *root;
