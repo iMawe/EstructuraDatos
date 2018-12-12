@@ -3,6 +3,10 @@
 
 #include "KDNode.h"
 #include <cstddef>
+#include <winbgim.h>
+#include <cstdlib>
+#include <fstream>
+#include <string>
  
 using namespace std;
  
@@ -14,11 +18,14 @@ public:
     virtual ~KDTree();
  
     KDNode* getRoot();
-    KDNode* masProximo(KDNode* nwnode);
+    KDNode* findClosestPoint(KDNode* entry);
     
     void print();
-    void insert(KDNode* newN);
-    void remove(KDNode* nwnode);
+    void remove(KDNode* entry);
+    void insert(KDNode* newEntry);
+    void printP();
+    void printA();
+	void printA(KDNode *r, ofstream & os);
     
 private:
     KDNode *root;
@@ -28,3 +35,4 @@ private:
 
 #include "KDTree.inl"
 #endif
+

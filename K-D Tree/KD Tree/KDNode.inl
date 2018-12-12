@@ -5,6 +5,7 @@ KDNode::KDNode() {
     child[0] = NULL;
     child[1] = NULL;
     parent = NULL;
+    //bisParent = NULL;
 }
  
 KDNode::KDNode(float _x, float _y){
@@ -13,7 +14,8 @@ KDNode::KDNode(float _x, float _y){
     beenHere = false;
     child[0] = NULL;
     child[1] = NULL;
-    parent = NULL;   
+    parent = NULL;
+    //bisParent = NULL;
 }
  
 KDNode::KDNode(const KDNode& orig) {
@@ -22,6 +24,7 @@ KDNode::KDNode(const KDNode& orig) {
     child[0] = orig.child[0];
     child[1] = orig.child[1];
     parent = orig.parent;
+    //bisParent = orig.bisParent;
 }
  
 KDNode::~KDNode() {
@@ -379,10 +382,48 @@ void KDNode::follow(KDNode *nwno){
 void KDNode::printNodes(){
     if(child[0] != NULL) child[0]->printNodes();
 
-    if(this->parent != NULL) cout<<"("<<this->x<<","<<this->y<<")==>level: "<<level<<"==>parent: ("<<this->getParent()->x<<","<<this->getParent()->y<<")"<<endl;
+    if(this->parent != NULL) cout<<"("<<this->x<<","<<this->y<<")-->level: "<<level<<"-->parent: ("<<this->getParent()->x<<","<<this->getParent()->y<<")"<<endl;
    
-    else cout<<"("<<this->x<<","<<this->y<<")==>level: "<<level<<"==>parent: ROOT"<<endl;
+    else cout<<"("<<this->x<<","<<this->y<<")-->level: "<<level<<"--> ROOT"<<endl;
     if(child[1] != NULL) child[1]->printNodes();    
+}
+
+void KDNode::printPNodes(){
+    if(child[0] != NULL) child[0]->printPNodes();
+    
+    if(this->parent != NULL){
+    	if(this->level == 1){
+    		
+		    	if(this->x < this->parent->x){
+		    		moveto(this->x * 12 + 10, 610 - (this->parent->y * 12));
+		    		lineto(this->x * 12 + 10, 610);
+		    	};
+		    	
+		    	if(this->x >= this->parent->x){
+		    		moveto((this->x * 12) + 10, 610 - (this->parent->y * 12));
+		    		lineto((this->x * 12) + 10, 10);
+		    	};
+		    	
+		};
+		
+		if(this->level == 0){
+			if(this->y < this->parent->y){
+	    		moveto(this->parent->x * 12 + 10, 610 - (this->y * 12));
+	    		lineto(10, 610 - (this->y * 12));
+	    	};
+	    	
+	    	if(this->y >= this->parent->y){
+	    		moveto((this->parent->x * 12) + 10, 610 - (this->y * 12));
+	    		lineto(610,  610 - (this->y * 12));
+	    	};
+		}
+	};
+    if(this->parent == NULL){
+        moveto(this->x * 12 + 10, 10);
+        lineto(this->x * 12 + 10, 610);
+    };
+    
+    if(child[1] != NULL) child[1]->printPNodes(); 
 }
  
 void KDNode::clearPoint(){
@@ -420,3 +461,4 @@ double KDNode::distanciaEntreDosPuntos(KDNode* a, KDNode* b){
     
     return dist;
 }
+

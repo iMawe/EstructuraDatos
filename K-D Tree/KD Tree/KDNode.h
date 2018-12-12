@@ -4,10 +4,15 @@
 #include <iostream>
 #include <vector>
 #include <math.h>
-#include <winbgim.h> 
+#include <winbgim.h>
+#include <cstdlib>
+#include <fstream>
+#include <string> 
 
 using namespace std;
- 
+
+class KDTree;
+
 class KDNode{
 public:
     KDNode();
@@ -35,6 +40,7 @@ public:
     void insertNode(KDNode* newNode, KDNode* &root);
     void removeNode(KDNode* nwno, KDNode* root);
     void printNodes();
+    void printPNodes();
     KDNode* fClosesNode(KDNode* nwno);
     KDNode* closesPath(KDNode* nwno, KDNode* root);
     void clearPoint();
@@ -49,8 +55,12 @@ private:
     bool beenHere;  
     KDNode* child[2];
     KDNode* parent;
+    //KDNode* bisParent;
+    
+friend class KDTree;
  
 };
 
 #include "KDNode.inl"
 #endif
+

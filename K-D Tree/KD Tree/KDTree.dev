@@ -1,5 +1,5 @@
 [Project]
-FileName=KD Tree.dev
+FileName=KDTree.dev
 Name=Project1
 Type=1
 Ver=2
@@ -28,8 +28,8 @@ Folders=
 IncludeVersionInfo=0
 SupportXPThemes=0
 CompilerSet=3
-CompilerSettings=0000000100000000000000000
-UnitCount=3
+CompilerSettings=0000000100000000001000000
+UnitCount=5
 
 [VersionInfo]
 Major=1
@@ -61,7 +61,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit2]
-FileName=KDTree.h
+FileName=KDNode.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -71,7 +71,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit3]
-FileName=KDNode.h
+FileName=KDTree.h
 CompileCpp=1
 Folder=
 Compile=1
@@ -81,7 +81,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit4]
-FileName=KDNode.cpp
+FileName=KDNode.inl
 CompileCpp=1
 Folder=
 Compile=1
@@ -91,7 +91,7 @@ OverrideBuildCmd=0
 BuildCmd=
 
 [Unit5]
-FileName=KDNode.h
+FileName=KDTree.inl
 CompileCpp=1
 Folder=
 Compile=1
