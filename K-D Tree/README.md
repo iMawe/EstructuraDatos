@@ -55,6 +55,7 @@ In local regressions it is common to evaluate the surface contained directly onl
 - download the files
 - open the file.dev
 - install the library *#include <winbgim.h>*
+- install graphviz
 - compile
 ## **References**
 
