@@ -40,7 +40,7 @@ Then we need to check the subtrees. If * q * is on the underside of the hyperpla
 we go to the left, otherwise to the right. After visiting the left subtree
 we have modified the candidate point * nn * and the distance to this point * dist *.
 
-## ** Uses KDTree **
+##  **Uses KDTree**
 
 **Orthogonal search in a kd tree**
 
@@ -51,14 +51,11 @@ Use a KDTree to find all the points that are in a certain rectangle (or analog o
 In local regressions it is common to evaluate the surface contained directly only by the vertices of the KDTree and interpolate at some point. This use, reflected in the image above, seeks to ensure that only the necessary direct evaluations will be made. As the KDTree "adapt" to space, this method can provide an excellent approximation to the true local regression surfaces. If the approach is poor, it can be improved with more subdivisions.
 
 ## **Requirements**
-
-
-
-
-
-
-
-
+- have Dev c ++
+- download the files
+- open the file.dev
+- install the library *#include <winbgim.h>*
+- compile
 ## **References**
 
 - http://www.cic.ipn.mx/aguzman/papers/89%20Arboles%20kd.htm
