@@ -103,11 +103,11 @@ void KDNode::setParent(KDNode* newParent){
 }
 
 void KDNode::insertNode(KDNode* newNode, KDNode* &root){
-    if(this->level){
-        if(this->x > newNode->x){
+    if(this->level){//1
+        if(this->x > newNode->x){//child[0]
             if(child[0] != NULL) child[0]->insertNode(newNode, root);
             else{
-                newNode->setLevel(!(this->getLevel()));
+                newNode->setLevel(!(this->getLevel()));//diferente nivel -> 0
                 newNode->setParent(this);
                 this->setChd0(newNode);
                 return;
@@ -125,9 +125,9 @@ void KDNode::insertNode(KDNode* newNode, KDNode* &root){
             }
         }
         else{
-            if(this->y == newNode->y) return;
+            if(this->y == newNode->y) return;//ya existe
             else{
-                if(child[1] != NULL) child[1]->insertNode(newNode, root);
+                if(child[1] != NULL) child[1]->insertNode(newNode, root);//si tiene child[1] insertamos debajo de ese
                 else{
                     newNode->setLevel(!(this->getLevel()));
                     newNode->setParent(this);
@@ -138,7 +138,7 @@ void KDNode::insertNode(KDNode* newNode, KDNode* &root){
         }            
     }
      
-    else if(!(this->level)){
+    else if(!(this->level)){//0
         if(this->y > newNode->y){
             if(child[0] != NULL)
                 child[0]->insertNode(newNode, root);
@@ -178,20 +178,20 @@ void KDNode::insertNode(KDNode* newNode, KDNode* &root){
  
 void KDNode::removeNode(KDNode* nwno, KDNode* root){
     if(this->level){
-        if(this->x > nwno->x){
+        if(this->x > nwno->x){//buscamos en child[0]
             if(child[0] != NULL) child[0]->removeNode(nwno, root);
             return;
         }
-        else if(this->x < nwno->x){
+        else if(this->x < nwno->x){//buscamos en child[1]
             if(child[1] != NULL) child[1]->removeNode(nwno, root);
             return;            
         }
         else{
             if(this->y == nwno->y){
-                if(this->child[0] == NULL && this->child[1] == NULL){
-                    if(this->parent->child[0]->x == this->x && this->parent->child[0]->y == this->y){
-                        this->parent->setChd0(NULL);
-                        delete this;
+                if(this->child[0] == NULL && this->child[1] == NULL){//no tiene hijos
+                    if(this->parent->child[0]->x == this->x && this->parent->child[0]->y == this->y){//
+                        this->parent->setChd0(NULL);//child[0] se cambia a nulo
+                        delete this;//eliminamos child[0]
                     }
                     else{
                         this->parent->setChd1(NULL);
@@ -207,10 +207,10 @@ void KDNode::removeNode(KDNode* nwno, KDNode* root){
                          
                     }
                     else{
-                        if(this->parent->child[0]->x == this->x && this->parent->child[0]->y == this->y) this->parent->setChd0(NULL);
+                        if(this->parent->child[0]->x == this->x && this->parent->child[0]->y == this->y) this->parent->setChd0(NULL); 
                         else this->parent->setChd1(NULL);
                     }                    
-                    this->balance(this, root);                    
+                    this->balance(this, root);//en caso de desconectar el arbol              
                 }
             }
             else{
@@ -266,78 +266,79 @@ void KDNode::removeNode(KDNode* nwno, KDNode* root){
 }
  
 KDNode* KDNode::fClosesNode(KDNode* nwno){
-    vector<KDNode>path;
-    follow(nwno);
+    vector<KDNode> path;
+    follow(nwno);//empezamos en la raiz del vector
     KDNode aux;
-    KDNode *pequeAnt = &aux;
-    KDNode *pequeNode = closesPath(nwno, this);
+    KDNode *pequeAnt = &aux;//punto anterior mas pequeño = NULL
+    KDNode *pequeNode = closesPath(nwno, this);//buscamos el nodo pequeño mas cercano, llamandolo ocn la raiz
      
-    while(!(pequeAnt->getX() == pequeNode->getX() && pequeAnt->getY() == pequeNode->getY())){ //visited before?   
+    while(!(pequeAnt->getX() == pequeNode->getX() && pequeAnt->getY() == pequeNode->getY())){ //visitado antes?, mientras que no sean iguales
         pequeAnt = pequeNode;
-        bool checkedLeft = false;
-        bool checkedRight = false;
+        bool checkedChd0 = false;
+        bool checkedChd1 = false;
          
-        if(pequeNode->getChd0()!=NULL && pequeNode->child[0]->beenHere){
-            checkedLeft = true;
+        if(pequeNode->getChd0() != NULL && pequeNode->child[0]->beenHere){//si pqNode tiene child[0] y si estuvo aqui
+            checkedChd0 = true;
         }
-        else if(pequeNode->getChd1()!=NULL && pequeNode->child[1]->beenHere){
-            checkedRight = true;
+        else if(pequeNode->getChd1() != NULL && pequeNode->child[1]->beenHere){
+            checkedChd1 = true;
         }
-        this->clearPoint();
+        this->clearPoint();//limpia la marca
 
-        if(checkedLeft){
-            pequeNode->setBeenHere(true);
-            if(pequeNode->getChd1() != NULL) (pequeNode->getChd1())->follow(nwno);
+        if(checkedChd0){//si es true
+            pequeNode->setBeenHere(true); //marcamos el mas cercano
+            if(pequeNode->getChd1() != NULL) (pequeNode->getChd1())->follow(nwno);//si tiene child[1] buscamos el camino para nwno, intercala por la correspondencia de niveles
         }
-        else if(checkedRight){
+        else if(checkedChd1){
             pequeNode->setBeenHere(true);
             if(pequeNode->getChd0() != NULL) (pequeNode->getChd0())->follow(nwno);
         }else{
             pequeNode->setBeenHere(true);
-            pequeNode->follow(nwno);
+            pequeNode->follow(nwno);//buscamos el camino para nwno
         }
-        pequeNode = closesPath(nwno, pequeNode);         
+        pequeNode = closesPath(nwno, pequeNode);//buscamos el nodo mas cercano
     }         
-    return pequeNode;    
+    return pequeNode;
 }
  
 KDNode* KDNode::closesPath(KDNode* nwno, KDNode* root){
     double distanceHolder = 100000000;
     KDNode* nodeHolder;
-    KDNode* current = root;
-    nodeHolder = current;
+    KDNode* aux = root;
+
+    nodeHolder = aux;//si solo tenemos un nodo, si hay mas no pasa nada
     bool noAvailableNode = false;
      
-    while(!noAvailableNode){
-        double tempDistance = distanciaEntreDosPuntos(nwno, current);
+    while(!noAvailableNode){//mientras no alcancemos una hoja
+        double tempDistance = distanciaEntreDosPuntos(nwno, aux);//hallamos la distancia entre ambos puntos
          
         if(tempDistance < distanceHolder){
-            distanceHolder = tempDistance;
-            nodeHolder = current;
+            distanceHolder = tempDistance;//copiamos la nueva distancia
+            nodeHolder = aux;//copiamos el nodo auxiliar
         }
          
-        bool nextNodeIsLeft = false;
-        bool nextNodeIsRight = false;
+        bool nextNodeIsChd0 = false;
+        bool nextNodeIsChd1 = false;
 
-        if(current->child[0] != NULL){
-            if(current->child[0]->beenHere == true){
-                nextNodeIsLeft = true;
+        if(aux->child[0] != NULL){//tiene child[0]
+            if(aux->child[0]->beenHere == true){//verifica si estuvo aqui
+                nextNodeIsChd0 = true;
                 noAvailableNode = false;
-                current = current->child[0];
+                aux = aux->child[0];
+            }else{
+                noAvailableNode = true;//llegamos a la hoja
+            }
+        }
+        if(aux->child[1] != NULL && !nextNodeIsChd0){//verifica que tenga child[1] y si el siguiente nodo es child[0]
+            if(aux->child[1]->beenHere == true){
+                nextNodeIsChd1 = true;
+                noAvailableNode = false;
+                aux = aux->child[1];
             }else{
                 noAvailableNode = true;
             }
         }
-        if(current->child[1] != NULL && !nextNodeIsLeft){
-            if(current->child[1]->beenHere == true){
-                nextNodeIsRight = true;
-                noAvailableNode = false;
-                current = current->child[1];
-            }else{
-                noAvailableNode = true;
-            }
-        }
-        if(current->child[0] == NULL && current->child[1] == NULL && !nextNodeIsLeft && !nextNodeIsRight) noAvailableNode = true;  
+        if(aux->child[0] == NULL && aux->child[1] == NULL && !nextNodeIsChd0 && !nextNodeIsChd1) noAvailableNode = true;//estamos en la hoja
     }
      
     return nodeHolder;
@@ -347,9 +348,9 @@ KDNode* KDNode::closesPath(KDNode* nwno, KDNode* root){
 void KDNode::follow(KDNode *nwno){
     this->setBeenHere(true); 
      
-    if(this->level){
+    if(this->level){//1
         if(this->x > nwno->getX()){           
-            if(child[0] != NULL) child[0]->follow(nwno);
+            if(child[0] != NULL) child[0]->follow(nwno);//tiene child[0] llamamos denuevo
         }
         else if(this->x < nwno->getX()){
             if(child[1] != NULL) child[1]->follow(nwno);
@@ -358,11 +359,11 @@ void KDNode::follow(KDNode *nwno){
             if(this->y == nwno->getY()){ //No revisa el resto del arbol
             }
             else{
-                if(child[1] != NULL) child[1]->follow(nwno);
+                if(child[1] != NULL) child[1]->follow(nwno);//y diferentes, entonces buscar el camino denuevo con child[1]
             }
         }      
     }
-    else{
+    else{//2
         if(this->y > nwno->getY()){
             if(child[0] != NULL) child[0]->follow(nwno);
         }        
@@ -427,27 +428,27 @@ void KDNode::printPNodes(){
 }
  
 void KDNode::clearPoint(){
-    if(child[0] != NULL) child[0]->clearPoint();
-    if(this->beenHere) this->setBeenHere(false);
-    if(child[1] != NULL) child[1]->clearPoint();  
+    if(child[0] != NULL) child[0]->clearPoint();//limpiamos child[0]
+    if(this->beenHere) this->setBeenHere(false);//si estuvo aqui --> false
+    if(child[1] != NULL) child[1]->clearPoint();
 }
  
 void KDNode::balance(KDNode* nwno, KDNode* root){
     if(this == NULL) return;
-    if(this->child[0] != NULL) child[0]->balance(nwno, root);
+    if(this->child[0] != NULL) child[0]->balance(nwno, root);//con child[0] hasta que sea hoja o no tenga conexion
     if(this->child[1] != NULL) child[1]->balance(nwno, root);
-    if(!(this->x == nwno->x && this->y == nwno->y)){
+    if(!(this->x == nwno->x && this->y == nwno->y)){//si son diferentes
         this->setBeenHere(false);
         this->setChd0(NULL);
         this->setChd1(NULL);
         this->setParent(NULL);
-        root->insertNode(this, root);
+        root->insertNode(this, root);//creamos la conexion
     }
     else{
         this->setChd1(NULL);
         this->setChd0(NULL);
         this->setParent(NULL);
-        delete this;
+        delete this;//eliminamos el desconectado
     }
 }
 
