@@ -51,10 +51,10 @@ int main() {
     KDtree->insert(node6);
     KDtree->insert(node2);
 	KDtree->insert(node7);
-	KDtree->insert(node8);
+	KDtree->insert(node3);/*
 	KDtree->insert(node3);
 	
-	KDtree->insert(node9);/*
+	KDtree->insert(node9);
 	KDtree->insert(node4);
 	KDtree->insert(node9);*/
     
